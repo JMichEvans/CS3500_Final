@@ -19,22 +19,9 @@ session_start();
 
   <body>
     <!-- Header -->
-    <?php require "header.php";?>
-
-    <!-- Brief Jumbotron -->
-    <section class="jumbotron">
-      <div class="custom-container">
-        <!-- "Default: Welcome, Gamer; cycle through Warlock/ADC/Yasuo Main..." -->
-        <h1>Greetings, Gamer</h1>
-      </div>
-    </section>
-
-<!-- Thread highlight -->
-    <section class="landing-thread-highlihgt">
-      <div class="custom-container">
-        <h2>Top thread:</h2>
-      </div>
-    </section>
+    <?php
+    require "header.php";
+    ?>
 
 <!-- Registration form -->
     <div class="landing-signup">

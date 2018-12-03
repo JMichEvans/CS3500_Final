@@ -13,10 +13,10 @@
  *
  ************************************************************************/
 
-/* 11/30/2018: Untested; Will expand tomorrow
+/* 11/30/2018: Untested; Will expand tomorrow */
 
-CREATE DATABASE IF NOT EXISTS CS3500_Forum_Database;
-USE CS3500_Forum_Database;
+CREATE DATABASE IF NOT EXISTS `martialboards_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `martialboards_db`;
 
 /*************************************************************************
  *
@@ -57,7 +57,8 @@ CREATE TABLE IF NOT EXISTS Threads (
 CREATE TABLE IF NOT EXISTS Comments (
     Comment_ID int (50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Comment_Author varchar(128) NOT NULL, /* pull from Users.Username */
-    Thread_Name varchar(128) NOT NULL /* Pull from Threads.Thread_Name */
+    Thread_Name varchar(128) NOT NULL, /* Pull from Threads.Thread_Name */
+    Comment_Text varchar(200) NOT NULL
 );
 
 /*************************************************************************

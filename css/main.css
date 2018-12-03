@@ -39,6 +39,7 @@ header {
   overflow-y:auto;
   z-index:1;
   border-bottom:1px solid var(--main-primary-color);
+  box-shadow: 0px 0px 20px var(--main-primary-color);
 }
 
 header #custom-branding {
@@ -46,12 +47,51 @@ header #custom-branding {
 }
 
 header ul {
-  float: right;
-  list-style:none;
+  float: left;
+  list-style: none;
 }
 
-ul .li-right {
-  float:left;
+header form {
+  float:right;
+  display:inline;
+}
+
+header form input[type="text"],
+header form input[type="password"]
+{
+  -webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	width: 200px;
+	background: black;
+  margin: 8px 0px;
+	border: 1px solid var(--main-primary-color);;
+  padding:10px 0px;
+	color: var(--main-primary-color);
+  font-weight: bold;
+  text-align: center;
+}
+
+header form input[type="text"]:focus,
+header form input[type="password"]:focus
+{
+  box-shadow: 0px 0px 20px var(--main-primary-color);
+}
+
+header form button {
+	width: 90px;
+  padding: 8px 10px;
+	background: var(--main-primary-color);
+  border-style: none;
+	color:black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+ul .li-left {
+  float:right;
   display:inline;
   padding:0px 0px 0px 0px;
 }
@@ -69,4 +109,13 @@ header a {
 header a:hover {
   background:var(--main-primary-color);
   color:black;
+}
+
+/* ========================================================================== */
+/* Sign up form */
+
+.form-registration {
+  width: 400px;
+  margin: 0 auto;
+  padding-top:30px;
 }
