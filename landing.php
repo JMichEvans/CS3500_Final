@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/main-mobile.css">
     
-    
     <title>Home</title>
   </head>
 
