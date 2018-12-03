@@ -34,11 +34,71 @@
 
     <!-- Brief Jumbotron w/header -->
     <!-- Top Forums -->
+    <div class="top-post">
+      <p id="top-text"></p>
+      <img id="top-img"></img>
+    </div>
+<?php
+  $comment = "";
+   if(isset($_FILES['image'])){
+      $errors= array();
+      $file_name = $_FILES['image']['name'];
+      $file_size =$_FILES['image']['size'];
+      $file_tmp =$_FILES['image']['tmp_name'];
+      
+      if($file_size > 1048576){
+         $errors[]='File size must be 1MB or less';
+      }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"../img/".$file_name);
+         echo "Success";
+      }
+      else{
+         print_r($errors);
+      }
+      $servername = "localhost";
+      $user = "Jake_Adkisson";
+      $pass = "testpassword2";
+      $db = "martialboards_db";
+      $table = "Comments";
+      $dbconnect = mysql_connect($servername,$user,$pass,$db);
+      mysql_select_db($db);
+      $sql = "INSERT INTO ".$table." (Comment_Picture) VALUES (../img/".$file_name.")";
+      mysql_close($dbconnect);
+   }
+   if(isset($comment)){
+      $servername = "localhost";
+      $user = "Jake_Adkisson";
+      $pass = "testpassword2";
+      $db = "martialboards_db";
+      $table = "Comments";
+      $dbconnect = mysqli_connect($servername,$user,$pass,$db);
+      mysql_select_db($db);
+      $sql = "INSERT INTO ".$table." (Comment_Text) VALUES (".$comment.")";
+      mysql_close($dbconnect);
+      /*try{
+        $connString = "mysql:host=localhost;dbname=init";
+        $pdo = new PDO($connString, $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO ".$db." (Comment_Text) VALUES (".$comment.")";
+        $result = $pdo->query($sql);
+        while($row = $result->fetch()){
+          echo $row['ID'] . " - " . $row['CategoryName'] . "<br/>";
+        }
+        $pdo = null;
+      }
+      catch (PDOException $e){
+        die($e->getMessage());
+      }*/
+   }
+?>
     <div class="upload-container">
           <p>Upload file or text:</p><br><br>
-          <form name="form" action="message.php" method="post">
+          <form name="form" action="message.php" method="POST">
             <input id="upload" type="file" name="image-upload" accept="image/*" capture>
-            <input id="text-upload" type="text"name="text-upload" required placeholder="Maximum 200 characters" capture>
+            <input id="text-upload" type="text"name="text-upload" required placeholder="Maximum 200 characters" value = "<?php echo $comment;?>"capture>
+            <input type="submit" value="Submit">
           </form> 
     </div>
     <!-- Footer -->
