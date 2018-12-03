@@ -10,6 +10,7 @@
     <meta name="author" content="JMichEvans, Jake Adkisson">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/main-mobile.css">
+    <script type="text/javascript" src="../js/landing.js"></script>
     
     <title>Home</title>
   </head>
@@ -34,6 +35,10 @@
 
     <!-- Brief Jumbotron w/header -->
     <!-- Top Forums -->
+    <div class="top-post">
+      <p id="top-text"></p>
+      <img id="top-img"></img>
+    </div>
     <div class="upload-container">
           <p>Upload file or text:</p><br><br>
           <form name="form" action="message.php" method="post">

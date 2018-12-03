@@ -7,6 +7,6 @@
 	$db = "Forums";
 	$dbconnect = mysql_connect($servername,$user,$pass,$db);
 	mysql_select_db($db);
-	$sql = "INSERT INTO ".$db." (FORUM_SUBJECT, FORUM_PICTURE) VALUES ('".$text."', ".$image.")";
+	$sql = "INSERT INTO ".$db." (Forum_Subject, Forum_Picture) VALUES ('".$text."', ".$image.")";
 	mysql_close($dbconnect);
 ?>
