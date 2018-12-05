@@ -8,14 +8,10 @@
     <meta name="description" content="The round table of all things gaming. Take a seat.">
     <meta name="keywords" content="gaming site, gaming forum, esports forum">
     <meta name="author" content="JMichEvans, Jake Adkisson">
-    <link rel="stylesheet" href="../css/main.css">
+    <!--<link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/main-mobile.css">
+    <script src="../js/landing.js"></script>-->
     
-    
-    <title>Home</title>
-  </head>
-
-  <body>
     <!-- Header -->
     <header>
       <div class="custom-container">
@@ -35,69 +31,58 @@
 
     <!-- Brief Jumbotron w/header -->
     <!-- Top Forums -->
-    <div class="top-post">
-      <p id="top-text"></p>
-      <img id="top-img"></img>
-    </div>
+
 <?php
-  $comment = "";
-  $servername = "localhost";
-  $user = "Jake_Adkisson";
-  $pass = "testpassword2";
-  $db = "phpmyadmin";
-  $table = "Comments";
-  $dbconnect = mysqli_connect($servername,$user,$pass,$db);
-   if(isset($_FILES['image'])){
-      $errors= array();
-      $file_name = $_FILES['image']['name'];
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      
-      if($file_size > 1048576){
-         $errors[]='File size must be 1MB or less';
+  require 'dbh.inc.php';
+  $image = isset($_POST['image']) ? $_POST['image']:'';
+  $comment = $_POST['text-upload'];
+  $table = "comment";
+  $sql = "SELECT * FROM comment ORDER BY Comment_Likes ASC";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+      // output data of each row
+      echo "<table>";
+      $count = 0;
+      while($row = $result->fetch_assoc()) {
+        echo "<tr>";
+          echo "<td><img src=\"".$row["Comment_Picture"]."\"></td>";
+          echo "<td>".$row["Comment_Text"]."</td>";
+          echo "<td> Likes: ".$row["Comment_Likes"];
+        echo "</tr>";
+        $count = $count+1;
       }
       
-      if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"../img/".$file_name);
-         echo "Success";
+      echo "</table>";
+  } else {
+      echo "0 results";
+  }
+   if(isset($image)){
+      move_uploaded_file($_FILES["image"]["tmp_name"],"../img/" . $_FILES["image"]["name"]);
+      $file="../img/".$_FILES["image"]["name"];
+      echo "FILE = ".$file;
+      $sql = "INSERT INTO ".$table." (Comment_Text, Comment_Picture) VALUES ('$comment', '$file')";
+      if ($conn->query($sql) === TRUE) {
+        //echo "New record created successfully";
       }
-      else{
-         print_r($errors);
+      else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
       }
-      $sql = "INSERT INTO ".$table." (Comment_Picture) VALUES (../img/".$file_name.")";
    }
-   if(isset($comment)){
-      /*$servername = "localhost";
-      $user = "Jake_Adkisson";
-      $pass = "testpassword2";
-      $db = "phpmyadmin";
-      $table = "Comments";
-      $dbconnect = mysqli_connect($servername,$user,$pass,$db) or die(mysql_error());
-      mysql_select_db($dbconnect, $table) or die("cannot connect to database");*/
-      $sql = "INSERT INTO ".$table." (Comment_Text) VALUES (".$comment.")";
-      
-      /*try{
-        $connString = "mysql:host=localhost;dbname=init";
-        $pdo = new PDO($connString, $user, $pass);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO ".$db." (Comment_Text) VALUES (".$comment.")";
-        $result = $pdo->query($sql);
-        while($row = $result->fetch()){
-          echo $row['ID'] . " - " . $row['CategoryName'] . "<br/>";
-        }
-        $pdo = null;
+   elseif(isset($comment)){
+      $sql = "INSERT INTO ".$table." (Comment_Text) VALUES ('$comment')";
+      if ($conn->query($sql) === TRUE) {
+        //echo "New record created successfully";
       }
-      catch (PDOException $e){
-        die($e->getMessage());
-      }*/
+      else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
    }
-   mysqli_close($dbconnect);
 ?>
     <div class="upload-container">
           <p>Upload file or text:</p><br><br>
-          <form name="form" action="" method="POST">
-            <input id="upload" type="file" name="image-upload" accept="image/*" capture>
-            <input id="text-upload" type="text"name="text-upload" required placeholder="Maximum 200 characters" value = "<?php echo $comment;?>"capture>
+          <form name="form" action="" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" capture>
+            <input id="text-upload" type="text"name="text-upload" required placeholder="Maximum 200 characters" capture>
             <input type="submit" value="Submit">
           </form> 
     </div>
