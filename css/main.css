@@ -24,6 +24,13 @@ body {
   overflow:hidden;
 }
 
+.uploaded-image{
+  max-width:250px;
+  max-height:250px;
+}
+.comments{
+  color:white;
+}
 /* ========================================================================== */
 /* Header */
 
@@ -92,6 +99,13 @@ header form button {
 
 ul .li-left {
   float:right;
+=======
+  float: right;
+  list-style:none;
+}
+
+ul .li-right {
+  float:left;
   display:inline;
   padding:0px 0px 0px 0px;
 }
@@ -118,4 +132,21 @@ header a:hover {
   width: 400px;
   margin: 0 auto;
   padding-top:30px;
+=======
+.upload-container{
+  color:white;
+  font-size:13;
+  position:fixed;
+  bottom:0;
+}
+#upload{
+  height:200px;
+  font-size:14pt;
+}
+.feed{
+  margin-left:25%;
+  margin-top:5%;
+}
+.comment-test{
+  margin-bottom:40%;
 }
