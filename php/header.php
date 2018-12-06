@@ -1,6 +1,10 @@
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
+?>
+
 <header>
-  <nav>
-    <div class="custom-container">
+  <div class="custom-container">
+    <nav>
       <div id="custom-branding">
         <a href = "landing.php">JJD</a>
       </div>

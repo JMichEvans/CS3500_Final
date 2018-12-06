@@ -1,3 +1,7 @@
+<?php
+session_start();
+ ?>
+
 <!DOCTYPE html>
 <!-- EULA (End-User License Agreement) -->
 <html lang="en" dir="ltr">

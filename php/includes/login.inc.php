@@ -1,11 +1,15 @@
 <?php
+
+// Checks to see if the user accesses this file via the submit button on the login form.
 if (isset($_POST['login-submit'])) {
 
+  # Database connection script
   require 'dbh.inc.php';
 
-  $mailuid = $_POST['mailuid']
+  $mailuid = $_POST['mailuid'];
   $password = $_POST['pwd'];
 
+  # If the user left mailuid and/or password blank
   if (empty($mailuid) || (empty($password))) {
     header("Location: ../landing.php?error=emptyfields");
     exit();
@@ -53,8 +57,11 @@ if (isset($_POST['login-submit'])) {
       }
     }
   }
+  # mysqli automatically closes the connection and stmt once they are out of scope.
 }
 
+# Returns the user to the landing page if they attempt to access
+# this script via its URL directly.
 else {
   header("Location: ../landing.php");
   exit();

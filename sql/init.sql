@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Comments (
 ************************************************************************/
 
 INSERT INTO Users(Username, Email, Password, User_Icon, User_Type) VALUES
-('JMichEvans', 'jeremymichevans@gmail.com', 'testpassword1', '../img/user_img/JMichEvans/Ensolace2_GraphicMainINverted.png'),
+('JMichEvans', 'jeremymichevans@gmail.com', '$2y$10$cwJ28YGheAjCeYocYpmcY.ChoCmfSwWEm5GzYff8aLHBCAa9jL3yC', '../img/user_img/JMichEvans/Ensolace2_GraphicMainINverted.png'),
 ('Jake_Adkisson', 'jacob.r.adkisson@wmich.edu', 'testpassword2', '../img/user_img/defaults/default_icon.png');
 
    

@@ -65,18 +65,18 @@ if(isset($_POST['signup-submit'])) {
 
         else {
           $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-          $user_icon = '../img/user_img/defaults/default_icon.png';
+          $user_icon = '../uploads/user_img/defaults/default_icon.png';
           $user_type = 'user';
           mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashedPwd, $user_icon, $user_type);
           mysqli_stmt_execute($stmt);
-          header("Location: ../landing.php?signup=success");
+          header("Location: ../landing.php?signup=success&username=".$username);
           exit();
         }
       }
     }
   }
   mysqli_stmt_close($stmt);
-  $mysqli_close($conn);
+  mysqli_close($conn);
 }
 
 else {

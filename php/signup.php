@@ -58,9 +58,20 @@ session_start();
             }
           }
 
-          else if ($_GET['signup'] == 'success') {
-            echo '<p class="signupsuccess">Signup successful!</p>';
+          else if (isset($_GET['signup'])) {
+            if ($_GET['signup'] == 'success') {
+              echo '<p class="signupsuccess">Signup successful!</p>';
+
+              $dir = "../uploads/user_img";
+              $username = $_GET['username'];
+              if(!mkdir("$dir/$username", 0700)) {
+                printf("THERE IS NO DIR!!");
+              } else {
+                printf("You good.");
+              }
+            }
           }
+
           ?>
           <form class="form-registration" action="../php/includes/signup.inc.php" method="post">
             <input type="text" name="Username" placeholder="Username">
