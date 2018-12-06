@@ -1,3 +1,10 @@
+
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
+?>
+
+=======
+
 <!DOCTYPE html>
 <!-- Landing page -->
 
@@ -10,29 +17,26 @@
     <meta name="author" content="JMichEvans, Jake Adkisson">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/main-mobile.css">
+     <a href = "landing.php">JJD</a>
     <script src="../js/landing.js"></script>
-    
-    <!-- Header -->
-    <header>
-      <div class="custom-container">
-        <div id="custom-branding">
-          <a href = "landing.php">JJD</a>
-        </div>
-        <nav>
-          <ul class="">
-            <li class="li-right"><a href="#">FORUMS</a></li>
-            <li class="li-right"><a href="#">LOGIN</a></li>
-            <!--<li><a href="#"><img src="../img/menu_red.png" alt="Menu Icon"></a></li> -->
-          </ul>
-        </nav>
 
-      </div>
-    </header>
+    <title>Home</title>
   </head>
-    <!-- Brief Jumbotron w/header -->
-    <!-- Top Forums -->
 
-<?php
+  <body>
+    <!-- Header -->
+    <?php require "header.php";?>
+
+    <!-- Brief Jumbotron -->
+    <section class="jumbotron">
+      <div class="custom-container">
+        <!-- "Default: Welcome, Gamer; cycle through Warlock/ADC/Yasuo Main..." -->
+        <h1>Greetings, Gamer</h1>
+      </div>
+    </section>
+
+<!-- Thread highlight -->
+    <?php
   require "dbh.inc.php";
   $image = isset($_POST['image']) ? $_POST['image']:'';
   $comment = isset($_POST['text-upload']) ? $_POST['text-upload']:'';
@@ -79,13 +83,25 @@
    }
   //require "message.php";
 ?>
+    <section class="landing-thread-highlight">
+      <div class="custom-container">
+        <h2>Top thread:</h2>
+      </div>
+    </section>
+
+    <div class="landing-signup">
+      <div class="custom-container">
+        <h3>Let's talk shop. Sign up below!</h3>
+      </div>
+
+
     <div class="upload-container">
           <p>Upload file or text:</p><br><br>
           <form name="form" action="" method="POST" enctype="multipart/form-data">
             <input type="file" name="image" accept="image/*" capture>
             <input id="text-upload" type="text"name="text-upload" required placeholder="Maximum 200 characters" capture>
             <input type="submit" value="Submit">
-          </form> 
+          </form>  
     </div>
     <!-- Footer -->
   </body>
